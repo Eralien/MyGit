@@ -14,8 +14,10 @@ def read_birth_file(filename):
     nation = [str(word[0]) for word in data]
     birtio = [float(word[1]) for word in data]
     lifexp = [float(word[2]) for word in data]
-    data = list(zip(nation, birtio, lifexp))
-    return title, data
+    data = zip(nation, birtio, lifexp)
+    len_data = len(data)
+    data = np.asarray(data, dtype=np.float32)
+    return title, data, len_data
 
 """
 The model is like this:
@@ -25,7 +27,8 @@ MSE = E[(y - y_predicted)^2]
 """
 cwd = os.getcwd()
 FILE_PATH = cwd + '/examples/data/birth_life_2010.txt'
-title, data = read_birth_file(FILE_PATH)
+_, data, len_data = read_birth_file(FILE_PATH)
+
 
 pass
 
