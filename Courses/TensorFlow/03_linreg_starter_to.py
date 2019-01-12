@@ -25,7 +25,8 @@ MSE = E[(y - y_predicted)^2]
 """
 cwd = os.getcwd()
 FILE_PATH = cwd + '/examples/data/birth_life_2010.txt'
-_, data = read_birth_file(FILE_PATH)
+title, data = read_birth_file(FILE_PATH)
+
 pass
 
 
