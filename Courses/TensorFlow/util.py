@@ -15,3 +15,9 @@ def read_birth_file(filename):
     len_data = len(data)
     data = np.asarray(data, dtype=np.float32)
     return title, data, len_data, nation
+
+def huber_loss(ground, pred, delta=15.0):
+    residual = tf.abs(ground - pred)
+    def f1(): return 0.5 * tf.square(residual)
+    def f2(): return delta * tf.abs(residual) - 0.5 * tf.sqare(delta)
+    return tf.cond(residual > delta, f2, f1)
