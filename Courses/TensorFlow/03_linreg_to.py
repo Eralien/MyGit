@@ -33,7 +33,7 @@ Y_pred = w * X + b
 
 sqrloss = tf.square(Y - Y_pred, name='loss')
 
-optimizier = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(sqrloss)
+optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(sqrloss)
 
 tic = time.time() # A suspicious naming style from MATLAB, which must indicate sth.
 
@@ -43,7 +43,7 @@ with tf.Session() as sess:
     for i in range(100):
         loss = 0
         for x, y in data:
-            _, sqrloss_ = sess.run([optimizier, sqrloss], feed_dict={X: x, Y:y})
+            _, sqrloss_ = sess.run([optimizer, sqrloss], feed_dict={X: x, Y:y})
             loss += sqrloss_
             pass
         print('Epoch {0}: {1}'.format(i, loss/len_data))
