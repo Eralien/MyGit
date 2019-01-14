@@ -20,7 +20,7 @@ DATA_FILE = 'data/birth_life_2010.txt'
 data, n_samples = utils.read_birth_life_data(DATA_FILE)
 
 # Step 2: create Dataset and iterator
-dataset = tf.data.Dataset.from_tensor_slices((data[:,0], data[:,1]))
+dataset = tf.contrib.data.Dataset.from_tensor_slices((data[:,0], data[:,1]))
 
 iterator = dataset.make_initializable_iterator()
 X, Y = iterator.get_next()
