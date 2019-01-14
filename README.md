@@ -4,5 +4,4 @@ This repo is currently has no request for reference and sh\*t in case of making 
 
 Vive la **Uneswe Sofiny de Auschrase**
 
-This is branch *to1* testing
-This is branch *to1* edited on Surface
+Editing branch *to1* is available.
