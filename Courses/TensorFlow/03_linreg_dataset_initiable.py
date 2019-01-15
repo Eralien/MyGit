@@ -33,8 +33,8 @@ b = tf.get_variable('bias', initializer=tf.constant(0.0))
 Y_predicted = X * w + b
 
 # Step 5: use the square error as the loss function
-loss = tf.square(Y - Y_predicted, name='loss')
-# loss = utils.huber_loss(Y, Y_predicted)
+# loss = tf.square(Y - Y_predicted, name='loss')
+loss = utils.huber_loss(Y, Y_predicted)
 
 # Step 6: using gradient descent with learning rate of 0.001 to minimize loss
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(loss)

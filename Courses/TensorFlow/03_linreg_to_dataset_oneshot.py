@@ -21,7 +21,7 @@ cwd = os.getcwd()
 FILE_PATH = cwd + '/data/birth_life_2010.txt'
 _, data, len_data, _ = util.read_birth_file(FILE_PATH)
 
-epoch_num = 100
+epoch_num = 160
 dataset = tf.contrib.data.Dataset.from_tensor_slices((data[:,0], data[:,1]))
 dataset = dataset.repeat(epoch_num)
 pass
@@ -40,7 +40,8 @@ b = tf.get_variable('bias', initializer=tf.constant(0.0))
 
 Y_pred = X * w + b
 
-sqrloss = tf.square(Y - Y_pred, name='loss')
+# sqrloss = tf.square(Y - Y_pred, name='loss')
+sqrloss = util.huber_loss(Y, Y_pred)
 
 optimizer = tf.train.GradientDescentOptimizer(learning_rate=0.001).minimize(sqrloss)
 
@@ -51,15 +52,15 @@ with tf.Session() as sess:
     writer = tf.summary.FileWriter('./graphs/linear_reg', sess.graph)
 
     # The iterator has to initalized anytime we start a epoch
-    loss = 0
+    total_loss = 0
     iter = 0
     try:
         while True:
             _, sqrloss_ = sess.run([optimizer, sqrloss])
-            loss += sqrloss_
+            total_loss += sqrloss_
             if iter%len_data == 0:
-                print('Epoch {0}: {1}'.format(int(math.floor(iter/len_data)), loss/(iter+1)))
-                loss = 0
+                print('Epoch {0}: {1}'.format(int(math.floor(iter/len_data)), total_loss/len_data))
+                total_loss = 0
             iter += 1
 
     except tf.errors.OutOfRangeError:
