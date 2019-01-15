@@ -29,7 +29,7 @@ train, val, test = utils.read_mnist(mnist_folder, flatten=True)
 
 # Step 2: Create datasets and iterator
 # create training Dataset and batch it
-train_data = tf.data.Dataset.from_tensor_slices(train)
+train_data = tf.contrib.data.Dataset.from_tensor_slices(train)
 train_data = train_data.shuffle(10000) # if you want to shuffle your data
 train_data = train_data.batch(batch_size)
 
